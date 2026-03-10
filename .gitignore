@@ -1,0 +1,21 @@
+# Credentials — never commit
+.credentials.json
+settings.json
+
+# Conversation & session state
+history.jsonl
+mcp-needs-auth-cache.json
+paste-cache/
+session-env/
+shell-snapshots/
+backups/
+
+# Runtime & cache
+cache/
+plugins/
+projects/
+file-history/
+downloads/
+
+# OS
+.DS_Store
