@@ -12,8 +12,16 @@ into a clear, actionable specification document.
    00-brief.md, 01-requirements.md,
    02-architecture/decision.md,
    03-tech-stack.md, 04-estimation.md
-2. Identify and resolve any contradictions between documents
-3. Output: 05-spec.md
+2. Read project.json to determine the requested output format.
+   If project.json is missing, default to Markdown and inform the user.
+3. Identify and resolve any contradictions between documents
+4. Write 05-spec.md (always — this is the source regardless of format)
+5. If format is not Markdown, convert after writing:
+   - PDF:  `pandoc 05-spec.md -o 05-spec.pdf --pdf-engine=xelatex`
+   - DOCX: `pandoc 05-spec.md -o 05-spec.docx`
+   - HTML: `pandoc 05-spec.md -o 05-spec.html --self-contained`
+   Check that pandoc is available before attempting conversion.
+   If pandoc is missing, inform the user and leave 05-spec.md as the deliverable.
 
 ## Output Structure (05-spec.md)
 

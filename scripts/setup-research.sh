@@ -99,9 +99,15 @@ fi
 if claude mcp list 2>/dev/null | grep -q "mcp-mermaid"; then
   echo "  ✓ mcp-mermaid already configured"
 else
-  claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid \
-    && echo "  ✓ mcp-mermaid installed" \
-    || echo "  ⚠ mcp-mermaid: run manually: claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid"
+  echo -n "  Install mcp-mermaid for diagram rendering? (y/N): "
+  read -r INSTALL_MERMAID
+  if [[ "$INSTALL_MERMAID" =~ ^[Yy]$ ]]; then
+    claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid \
+      && echo "  ✓ mcp-mermaid installed" \
+      || echo "  ⚠ mcp-mermaid: run manually: claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid"
+  else
+    echo "  ⚠ mcp-mermaid skipped — diagrams will render as Mermaid code only"
+  fi
 fi
 
 echo ""
