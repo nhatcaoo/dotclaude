@@ -110,6 +110,71 @@ Each machine needs its own `claude login` and `setup-mcp.sh` run.
 
 ---
 
+## Research Workspace
+
+A structured research pipeline for techleads: requirements → architecture
+→ tech stack → estimation → spec.
+
+### Quick Setup (new machine)
+
+```bash
+./scripts/setup-research.sh
+```
+
+This creates `~/research-workspace/` and installs all required skills.
+
+### How to Use
+
+```bash
+cd ~/research-workspace
+claude
+# Type: /new-project
+```
+
+### Pipeline (RIPER Workflow)
+
+```
+Paste brief → /new-project
+  └─ [R] Requirements Analysis    → 01-requirements.md    ✋ approve
+  └─ [I] Architecture Options     → 02-architecture/      ✋ choose 1
+  └─ [P] Tech Stack + Estimation  → 03 + 04               ✋ approve
+  └─ [E] Final Spec               → 05-spec.md            ✋ review
+```
+
+### Skills Installed
+
+| Skill                          | Source                            | Purpose                                      |
+|--------------------------------|-----------------------------------|----------------------------------------------|
+| prd-development                | deanpeters/Product-Manager-Skills | PRD workflow                                 |
+| sdd (plugin)                   | NeoLabHQ/context-engineering-kit  | Spec-driven dev (/sdd:plan, /sdd:implement)  |
+| brainstorming                  | obra/superpowers                  | Creative exploration                         |
+| writing-plans                  | obra/superpowers                  | Plan writing                                 |
+| verification-before-completion | obra/superpowers                  | Output validation                            |
+| mcp-mermaid                    | hustcc                            | Diagram rendering                            |
+
+> **Note:** The SDD plugin must be installed separately inside the workspace:
+> ```
+> /plugin marketplace add NeoLabHQ/context-engineering-kit
+> /plugin install sdd@context-engineering-kit
+> ```
+
+### Project Output Structure
+
+```
+projects/YYYY-MM-{name}/
+  00-brief.md
+  01-requirements.md
+  02-architecture/
+    options.md
+    decision.md        ← ADR
+    diagrams/          ← .mmd + .png
+  03-tech-stack.md
+  04-estimation.md
+  05-spec.md           ← share this with team
+```
+
+---
+
 ## Per-Project Serena Setup
 
 Serena is intentionally **not** in this repo — it's scoped per project:
