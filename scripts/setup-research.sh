@@ -76,6 +76,17 @@ if [ ${#OBRA_NEEDED[@]} -gt 0 ]; then
   done
 fi
 
+# SpillwaveSolutions/design-doc-mermaid — better Mermaid diagrams
+if [ -d "$SKILLS_DIR/design-doc-mermaid" ]; then
+  echo "  ✓ design-doc-mermaid (already installed)"
+else
+  echo "  → cloning design-doc-mermaid..."
+  git clone --depth 1 \
+    https://github.com/SpillwaveSolutions/design-doc-mermaid.git \
+    "$SKILLS_DIR/design-doc-mermaid" -q
+  echo "  ✓ design-doc-mermaid"
+fi
+
 # NeoLabHQ context-engineering-kit (SDD plugin)
 # Requires plugin installation inside the workspace — cannot be automated here
 echo "  ℹ sdd: run inside workspace after setup:"

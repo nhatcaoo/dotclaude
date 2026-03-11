@@ -10,3 +10,29 @@ Arguments: $ARGUMENTS (diagram type and description)
 
 Supported types: C4 context, C4 container, sequence,
 ERD, flowchart, state diagram, Gantt
+
+## Styling rules — always apply when generating architecture diagrams
+
+Use the design-doc-mermaid skill for syntax reference and best practices.
+
+- Add `%%{ init: { 'theme': 'base', 'themeVariables': { 'fontSize': '14px',
+  'primaryColor': '#dbeafe', 'primaryBorderColor': '#3b82f6',
+  'secondaryColor': '#fef3c7', 'tertiaryColor': '#dcfce7' } } }%%`
+  at the top of every architecture diagram
+- Apply `classDef` to visually group components:
+  ```
+  classDef external fill:#f3f4f6,stroke:#6b7280,color:#111
+  classDef internal fill:#dbeafe,stroke:#3b82f6,color:#111
+  classDef datastore fill:#fef3c7,stroke:#f59e0b,color:#111
+  classDef client fill:#dcfce7,stroke:#16a34a,color:#111
+  classDef queue fill:#fae8ff,stroke:#a855f7,color:#111
+  ```
+- Use unicode in node labels: 🗄️ database, 📱 mobile, 🔒 auth,
+  ⚡ queue/async, 🌐 external API, 🛡️ security layer
+- Direction: `LR` for context diagrams, `TD` for flow/sequence
+- Add `%% comment` on non-obvious edges
+- After generating, validate syntax:
+  ```bash
+  mmdc -i <file.mmd> -o /tmp/validate.svg 2>&1
+  ```
+  Fix any errors before saving the file.

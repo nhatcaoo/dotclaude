@@ -21,8 +21,11 @@ downloads/
 # Research workspace — user-created projects (runtime, not config)
 research/projects/
 
-# Community skills installed by npx skills into research workspace (runtime binaries)
+# Community skills installed via git clone (runtime, installed by setup-research.sh)
 research/.claude/skills/*/
+
+# npx skills lock file (runtime artifact)
+skills-lock.json
 
 # Community skills symlinked into ~/.claude/skills/ by npx skills --global
 # gemini-web-fetch is the only custom skill tracked here; others are community-installed
