@@ -69,16 +69,26 @@ echo "  ℹ sdd: run inside workspace after setup:"
 echo "      /plugin marketplace add NeoLabHQ/context-engineering-kit"
 echo "      /plugin install sdd@NeoLabHQ/context-engineering-kit"
 
-# mcp-mermaid installs globally (available across all projects)
+# 3. MCP servers (global — available across all projects)
 echo ""
-echo "→ Checking mcp-mermaid..."
-if claude mcp list 2>/dev/null | grep -q "mcp-mermaid"; then
-  echo "  ✓ mcp-mermaid already installed"
+echo "→ Setting up MCP servers..."
+
+# Context7 — library docs fetching (used by architect + tech-advisor agents)
+if claude mcp list 2>/dev/null | grep -q "context7"; then
+  echo "  ✓ Context7 already configured"
 else
-  echo "  → Installing mcp-mermaid..."
+  claude mcp add --transport http context7 https://mcp.context7.com/mcp \
+    && echo "  ✓ Context7 installed" \
+    || echo "  ⚠ Context7: run manually: claude mcp add --transport http context7 https://mcp.context7.com/mcp"
+fi
+
+# mcp-mermaid — diagram rendering (used by /diagram command)
+if claude mcp list 2>/dev/null | grep -q "mcp-mermaid"; then
+  echo "  ✓ mcp-mermaid already configured"
+else
   claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid \
     && echo "  ✓ mcp-mermaid installed" \
-    || echo "  ⚠ Run manually: claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid"
+    || echo "  ⚠ mcp-mermaid: run manually: claude mcp add --transport stdio mcp-mermaid -- npx -y mcp-mermaid"
 fi
 
 echo ""
