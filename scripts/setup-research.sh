@@ -8,6 +8,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTCLAUDE_DIR="$(dirname "$SCRIPT_DIR")"
 RESEARCH_SRC="$DOTCLAUDE_DIR/research"
 WORKSPACE="$HOME/research-workspace"
+SKILLS_DIR="$WORKSPACE/.claude/skills"
 
 echo "=== TechLead Research Workspace Setup ==="
 echo ""
@@ -19,48 +20,60 @@ fi
 
 echo "→ Creating workspace at $WORKSPACE..."
 mkdir -p "$WORKSPACE/projects"
-mkdir -p "$WORKSPACE/.claude/skills"
+mkdir -p "$SKILLS_DIR"
 
 if command -v rsync &> /dev/null; then
   rsync -a "$RESEARCH_SRC/.claude/agents/"   "$WORKSPACE/.claude/agents/"
   rsync -a "$RESEARCH_SRC/.claude/commands/" "$WORKSPACE/.claude/commands/"
-  rsync -a "$RESEARCH_SRC/.claude/skills/"   "$WORKSPACE/.claude/skills/"
   cp "$RESEARCH_SRC/.claude/CLAUDE.md"       "$WORKSPACE/.claude/CLAUDE.md"
   rsync -a "$RESEARCH_SRC/templates/"        "$WORKSPACE/templates/"
 else
   rm -rf "$WORKSPACE/.claude/agents" "$WORKSPACE/.claude/commands" "$WORKSPACE/templates"
   cp -r "$RESEARCH_SRC/.claude/agents"    "$WORKSPACE/.claude/agents"
   cp -r "$RESEARCH_SRC/.claude/commands"  "$WORKSPACE/.claude/commands"
-  cp -r "$RESEARCH_SRC/.claude/skills/."  "$WORKSPACE/.claude/skills/"
   cp    "$RESEARCH_SRC/.claude/CLAUDE.md" "$WORKSPACE/.claude/CLAUDE.md"
   cp -r "$RESEARCH_SRC/templates"         "$WORKSPACE/templates"
 fi
 
 echo "  ✓ Workspace structure created"
 
-# 2. Install community skills into workspace-local skills folder
+# 2. Install community skills via git clone (workspace-local, no npx skills)
 echo ""
-echo "→ Installing community skills ($WORKSPACE/.claude/skills/)..."
+echo "→ Installing community skills ($SKILLS_DIR)..."
 
-if command -v npx &> /dev/null; then
-  npx skills add deanpeters/Product-Manager-Skills --skill prd-development \
-    -a claude-code --path "$WORKSPACE/.claude/skills/" -y \
-    && echo "  ✓ prd-development" || echo "  ⚠ prd-development: install manually"
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
 
-  npx skills add obra/superpowers --skill brainstorming \
-    -a claude-code --path "$WORKSPACE/.claude/skills/" -y \
-    && echo "  ✓ brainstorming" || echo "  ⚠ brainstorming: install manually"
-
-  npx skills add obra/superpowers --skill writing-plans \
-    -a claude-code --path "$WORKSPACE/.claude/skills/" -y \
-    && echo "  ✓ writing-plans" || echo "  ⚠ writing-plans: install manually"
-
-  npx skills add obra/superpowers --skill verification-before-completion \
-    -a claude-code --path "$WORKSPACE/.claude/skills/" -y \
-    && echo "  ✓ verification-before-completion" || echo "  ⚠ verification-before-completion: install manually"
+# deanpeters/Product-Manager-Skills — prd-development
+if [ -d "$SKILLS_DIR/prd-development" ]; then
+  echo "  ✓ prd-development (already installed)"
 else
-  echo "  ⚠ npx not found — install Node.js first, then re-run"
-  echo "    Or manually copy SKILL.md files to $WORKSPACE/.claude/skills/"
+  echo "  → cloning prd-development..."
+  git clone --depth 1 --filter=blob:none --sparse \
+    https://github.com/deanpeters/Product-Manager-Skills.git "$TMP/pm" -q
+  git -C "$TMP/pm" sparse-checkout set skills/prd-development -q
+  cp -r "$TMP/pm/skills/prd-development" "$SKILLS_DIR/prd-development"
+  echo "  ✓ prd-development"
+fi
+
+# obra/superpowers — brainstorming, writing-plans, verification-before-completion
+OBRA_NEEDED=()
+for skill in brainstorming writing-plans verification-before-completion; do
+  if [ -d "$SKILLS_DIR/$skill" ]; then
+    echo "  ✓ $skill (already installed)"
+  else
+    OBRA_NEEDED+=("$skill")
+  fi
+done
+
+if [ ${#OBRA_NEEDED[@]} -gt 0 ]; then
+  echo "  → cloning obra/superpowers (${OBRA_NEEDED[*]})..."
+  git clone --depth 1 \
+    https://github.com/obra/superpowers.git "$TMP/obra" -q
+  for skill in "${OBRA_NEEDED[@]}"; do
+    cp -r "$TMP/obra/skills/$skill" "$SKILLS_DIR/$skill"
+    echo "  ✓ $skill"
+  done
 fi
 
 # NeoLabHQ context-engineering-kit (SDD plugin)

@@ -143,6 +143,9 @@ Paste brief → /new-project
 
 ### Skills Installed
 
+Skills are installed globally (`~/.claude/skills/`) by the setup script.
+Claude Code discovers them automatically in all sessions.
+
 | Skill                          | Source                            | Purpose                                      |
 |--------------------------------|-----------------------------------|----------------------------------------------|
 | prd-development                | deanpeters/Product-Manager-Skills | PRD workflow                                 |
@@ -150,7 +153,7 @@ Paste brief → /new-project
 | brainstorming                  | obra/superpowers                  | Creative exploration                         |
 | writing-plans                  | obra/superpowers                  | Plan writing                                 |
 | verification-before-completion | obra/superpowers                  | Output validation                            |
-| mcp-mermaid                    | hustcc                            | Diagram rendering                            |
+| mcp-mermaid                    | hustcc                            | Diagram rendering (MCP, global)              |
 
 > **Note:** The SDD plugin must be installed separately inside the workspace:
 > ```
