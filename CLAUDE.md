@@ -35,3 +35,4 @@
 - Context7 usage: see rules/context7.md
 - Serena usage: see rules/serena.md
 - SSH conventions: see rules/ssh.md
+- Research workspace: see rules/research.md

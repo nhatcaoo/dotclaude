@@ -16,7 +16,8 @@ Personal Claude Code configuration. Drop `~/.claude/` contents here — rules, a
 │   ├── ssh.md                   # SSH host alias priority, known hosts
 │   ├── gemini.md                # When/how to delegate to Gemini CLI
 │   ├── context7.md              # Fetch library docs before implementing
-│   └── serena.md                # Serena MCP for code navigation
+│   ├── serena.md                # Serena MCP for code navigation
+│   └── research.md              # Diagram high-res PNG + MD→PDF export rules
 │
 ├── agents/                      # Custom subagents
 │   └── gemini-analyzer.md       # Delegates large codebase analysis to Gemini
@@ -139,6 +140,7 @@ Paste brief → /new-project
   └─ [I] Architecture Options     → 02-architecture/      ✋ choose 1
   └─ [P] Tech Stack + Estimation  → 03 + 04               ✋ approve
   └─ [E] Final Spec               → 05-spec.md            ✋ review
+  └─ [Export]                     → /export-pdf (pdf-exports/)
 ```
 
 ### Skills Installed
@@ -170,7 +172,7 @@ projects/YYYY-MM-{name}/
   02-architecture/
     options.md
     decision.md        ← ADR
-    diagrams/          ← .mmd + .png
+    diagrams/          ← .mmd + .png (high-res via mmdc --scale 3)
   03-tech-stack.md
   04-estimation.md
   05-spec.md           ← share this with team
