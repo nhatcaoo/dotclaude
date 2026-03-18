@@ -28,7 +28,8 @@ Personal Claude Code configuration. Drop `~/.claude/` contents here — rules, a
 │
 └── scripts/                     # Setup automation
     ├── setup-mcp.sh             # Install MCP servers (Context7, GitHub MCP)
-    └── setup-serena.sh          # Per-project Serena MCP setup
+    ├── setup-serena.sh          # Per-project Serena MCP setup
+    └── docx_fix_tables.py       # Post-processor: add full grid borders to all tables in .docx
 ```
 
 ## Quick Start (new machine)
