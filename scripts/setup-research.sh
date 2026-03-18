@@ -87,6 +87,31 @@ else
   echo "  ✓ design-doc-mermaid"
 fi
 
+# 199-biotechnologies/claude-deep-research-skill — citation-backed research engine
+if [ -d "$SKILLS_DIR/deep-research" ]; then
+  echo "  ✓ deep-research (already installed)"
+else
+  echo "  → cloning deep-research..."
+  git clone --depth 1 \
+    https://github.com/199-biotechnologies/claude-deep-research-skill.git \
+    "$SKILLS_DIR/deep-research" -q \
+    && echo "  ✓ deep-research" \
+    || echo "  ⚠ deep-research: install manually"
+fi
+
+# deanpeters/company-research — company analysis framework
+if [ -d "$SKILLS_DIR/company-research" ]; then
+  echo "  ✓ company-research (already installed)"
+else
+  echo "  → cloning company-research..."
+  git clone --depth 1 --filter=blob:none --sparse \
+    https://github.com/deanpeters/Product-Manager-Skills.git "$TMP/pm-cr" -q
+  git -C "$TMP/pm-cr" sparse-checkout set skills/company-research -q
+  cp -r "$TMP/pm-cr/skills/company-research" "$SKILLS_DIR/company-research"
+  rm -rf "$TMP/pm-cr"
+  echo "  ✓ company-research"
+fi
+
 # NeoLabHQ context-engineering-kit (SDD plugin)
 # Requires plugin installation inside the workspace — cannot be automated here
 echo "  ℹ sdd: run inside workspace after setup:"
