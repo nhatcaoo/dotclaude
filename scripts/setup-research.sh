@@ -56,26 +56,6 @@ else
   echo "  ✓ prd-development"
 fi
 
-# obra/superpowers — brainstorming, writing-plans, verification-before-completion
-OBRA_NEEDED=()
-for skill in brainstorming writing-plans verification-before-completion; do
-  if [ -d "$SKILLS_DIR/$skill" ]; then
-    echo "  ✓ $skill (already installed)"
-  else
-    OBRA_NEEDED+=("$skill")
-  fi
-done
-
-if [ ${#OBRA_NEEDED[@]} -gt 0 ]; then
-  echo "  → cloning obra/superpowers (${OBRA_NEEDED[*]})..."
-  git clone --depth 1 \
-    https://github.com/obra/superpowers.git "$TMP/obra" -q
-  for skill in "${OBRA_NEEDED[@]}"; do
-    cp -r "$TMP/obra/skills/$skill" "$SKILLS_DIR/$skill"
-    echo "  ✓ $skill"
-  done
-fi
-
 # SpillwaveSolutions/design-doc-mermaid — better Mermaid diagrams
 if [ -d "$SKILLS_DIR/design-doc-mermaid" ]; then
   echo "  ✓ design-doc-mermaid (already installed)"
