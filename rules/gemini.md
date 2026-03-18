@@ -1,8 +1,6 @@
 # Gemini CLI Delegation Rules
 
-> NOTE: `gemini` CLI is not currently installed on this machine.
-> Install via: https://github.com/google-gemini/gemini-cli
-> Or: `npm install -g @google/gemini-cli`
+> `gemini` CLI v0.32.1 is installed and authenticated on this machine.
 
 ## When to Use Gemini
 - Analyzing 20+ files at once
