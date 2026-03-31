@@ -144,6 +144,21 @@ Paste brief → /new-project
   └─ [Export]                     → /export-pdf (pdf-exports/)
 ```
 
+### Research Agents
+
+Two specialized agents for research projects (no pipeline needed):
+
+| Command | Agent | Output folder |
+|---|---|---|
+| `/research-partner [company]` | `partner-researcher` | `projects/YYYY-MM-partner-{slug}/` |
+| `/research-topic [topic]` | `topic-researcher` | `projects/YYYY-MM-topic-{slug}/` |
+
+**partner-researcher** — Company/partner due diligence. Sections: Company Overview, Products & Services, Financials, Team & Leadership, Market Position, Vietnam Context. Output: MD + PDF.
+
+**topic-researcher** — General topic research (market, technology, landscape). Sections: Background & Context, Key Players, Market/Landscape Overview, Technology Angle, Community Signals, Risks & Opportunities. Output: MD + DOCX.
+
+Both agents: multi-round web search, full citations with dates, source freshness flags, RIPER checkpoints.
+
 ### Skills Installed
 
 Skills are installed globally (`~/.claude/skills/`) by the setup script.
