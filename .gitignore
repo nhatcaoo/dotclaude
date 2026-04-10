@@ -23,6 +23,8 @@ research/projects/
 
 # Community skills installed via git clone (runtime, installed by setup-research.sh)
 research/.claude/skills/*/
+# Custom dotclaude skills (tracked in repo)
+!research/.claude/skills/seminar-prep/
 
 # npx skills lock file (runtime artifact)
 skills-lock.json

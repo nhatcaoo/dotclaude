@@ -92,6 +92,15 @@ else
   echo "  ✓ company-research"
 fi
 
+# seminar-prep — custom dotclaude skill for training doc section processing
+if [ -d "$SKILLS_DIR/seminar-prep" ]; then
+  echo "  ✓ seminar-prep (already installed)"
+else
+  echo "  → installing seminar-prep..."
+  cp -r "$RESEARCH_SRC/.claude/skills/seminar-prep" "$SKILLS_DIR/seminar-prep"
+  echo "  ✓ seminar-prep"
+fi
+
 # NeoLabHQ context-engineering-kit (SDD plugin)
 # Requires plugin installation inside the workspace — cannot be automated here
 echo "  ℹ sdd: run inside workspace after setup:"

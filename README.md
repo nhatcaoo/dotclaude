@@ -172,6 +172,7 @@ Claude Code discovers them automatically in all sessions.
 | writing-plans                  | obra/superpowers                  | Plan writing                                 |
 | verification-before-completion | obra/superpowers                  | Output validation                            |
 | mcp-mermaid                    | hustcc                            | Diagram rendering (MCP, global)              |
+| seminar-prep                   | custom (dotclaude)                | Process training doc sections into slide content, deep-read analysis, and shorthand seminar notes |
 
 > **Note:** The SDD plugin must be installed separately inside the workspace:
 > ```
