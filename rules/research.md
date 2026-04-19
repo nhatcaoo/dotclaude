@@ -1,5 +1,11 @@
 # Research Workspace Rules
 
+## Architecture Diagrams (HTML/SVG)
+- For polished HTML architecture diagrams (system, cloud, microservices), use `/architecture-diagram`
+- Output is a single self-contained `.html` file — open directly in browser, no dependencies
+- Use this instead of Mermaid when visual quality matters (client deliverables, presentations)
+- Mermaid → quick sketches and .mmd source; `/architecture-diagram` → final presentation output
+
 ## Diagram PNG Generation
 - Always render Mermaid diagrams to high-resolution PNG:
   ```bash

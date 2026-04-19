@@ -173,6 +173,7 @@ Claude Code discovers them automatically in all sessions.
 | verification-before-completion | obra/superpowers                  | Output validation                            |
 | mcp-mermaid                    | hustcc                            | Diagram rendering (MCP, global)              |
 | seminar-prep                   | custom (dotclaude)                | Process training doc sections into slide content, deep-read analysis, and shorthand seminar notes |
+| architecture-diagram           | Cocoon-AI/architecture-diagram-generator | Generate dark-themed SVG architecture diagrams as standalone HTML files |
 
 > **Note:** The SDD plugin must be installed separately inside the workspace:
 > ```
