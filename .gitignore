@@ -3,6 +3,9 @@
 settings.json
 settings.local.json
 
+# log-work skill state — cached SRA bearer token + personal profile
+.sra/
+
 # Conversation & session state
 history.jsonl
 mcp-needs-auth-cache.json
