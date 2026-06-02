@@ -39,5 +39,9 @@ skills/prd-development
 skills/writing-plans
 skills/verification-before-completion
 
+# log-work now lives in its own repo (github.com/nhatcaoo/sra-skills),
+# symlinked into skills/ — source of truth is that repo, not this one
+skills/log-work
+
 # OS
 .DS_Store
